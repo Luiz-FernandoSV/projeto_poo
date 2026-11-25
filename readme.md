@@ -37,14 +37,48 @@ A aplicação permite cadastrar, consultar, atualizar e excluir produtos, além 
 
 ### Pré-requisitos
 
-- JDK compatível com a versão configurada no projeto.
-- Gradle ou Gradle Wrapper incluído no projeto.
-- MariaDB instalado e em execução.
+- Liberica JDK 25 instalado e configurado.
+- Gradle 9.9.2 ou Gradle Wrapper incluído no projeto.
+- MySQL instalado e em execução.
 - Banco de dados `bd_controle_comanda` criado e configurado.
+
+### Configuração do ambiente
+
+**1. Instalação do Gradle 9.9.2**
+
+Faça o download da distribuição pelo endereço:
+
+https://services.gradle.org/distributions/gradle-9.9.2-bin.zip
+
+Extraia o arquivo em um diretório de sua preferência. No Windows, adicione a pasta `bin` do Gradle à variável de ambiente `PATH`.
+
+Exemplo:
+
+```powershell
+$env:PATH = "C:\opt\gradle-9.9.2\bin;$env:PATH"
+```
+
+Verifique a instalação:
+
+```bash
+gradle --version
+```
+
+**2. Dependência JDBC**
+
+O projeto utiliza o driver JDBC do MariaDB para realizar a conexão com o banco de dados MySQL.
+
+A dependência utilizada no arquivo `build.gradle.kts` é:
+
+```kotlin
+implementation("org.mariadb.jdbc:mariadb-java-client:3.5.11")
+```
+
+Não é necessário instalar o servidor MariaDB, pois o projeto utiliza o MySQL como servidor de banco de dados.
 
 ### Configuração do banco de dados
 
-1. Inicie o servidor MariaDB.
+1. Inicie o servidor MySQL.
 2. Crie o banco de dados `bd_controle_comanda`.
 3. Execute o script SQL de criação das tabelas disponibilizado no projeto.
 4. Confira as configurações de conexão com o banco de dados nas classes DAO, ajustando endereço, porta, usuário e senha conforme o ambiente.
@@ -53,14 +87,16 @@ A aplicação permite cadastrar, consultar, atualizar e excluir produtos, além 
 
 Na pasta raiz do projeto, execute:
 
-```bash
-./gradlew run
-```
-
-No Windows, utilize:
+**Windows:**
 
 ```powershell
-gradlew.bat run
+.\gradlew.bat run
+```
+
+**Linux:**
+
+```bash
+./gradlew run
 ```
 
 Caso o Gradle Wrapper não esteja disponível, utilize o Gradle instalado na máquina:
@@ -69,6 +105,6 @@ Caso o Gradle Wrapper não esteja disponível, utilize o Gradle instalado na má
 gradle run
 ```
 
-## Vídeo de apresentação
+### Vídeo de apresentação
 
-[Link para o vídeo no YouTube — público ou não listado]
+[https://youtu.be/iCA2S_ZNz90](https://youtu.be/iCA2S_ZNz90)
